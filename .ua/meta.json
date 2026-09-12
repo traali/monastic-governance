@@ -1,0 +1,9 @@
+{
+  "tool": "federation-understand",
+  "compatibleWith": "Egonex-AI/Understand-Anything 1.0.0",
+  "generatedAt": "2026-09-12T10:44:08.755Z",
+  "repo": "monastic-governance",
+  "commit": "96ba1719e32eb25a238efe58bb68e9981b48a952",
+  "nodeCount": 17,
+  "edgeCount": 4
+}

@@ -1,12 +1,13 @@
 {
   "name": "monastic-governance",
   "version": "1.0.0",
-  "description": "The Monastic Governance Model for AI Coding Agents — Zero-regression, clean-room audited agentic software engineering blueprint.",
+  "description": "The Monastic Governance Model for AI Coding Agents \u2014 Zero-regression, clean-room audited agentic software engineering blueprint.",
   "type": "module",
   "scripts": {
-    "lint": "node -e \"console.log('✅ Lint check passed (0 errors).')\"",
-    "test": "node -e \"console.log('✅ Test suite passed (100% green).')\"",
-    "visit": "node scripts/monastery-visitor.mjs"
+    "lint": "node -e \"console.log('\u2705 Lint check passed (0 errors).')\"",
+    "test": "node -e \"console.log('\u2705 Test suite passed (100% green).')\"",
+    "visit": "node scripts/monastery-visitor.mjs",
+    "understand": "node scripts/understand.mjs"
   },
   "keywords": [
     "ai-agents",

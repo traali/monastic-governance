@@ -1,0 +1,313 @@
+{
+  "version": "1.0.0",
+  "kind": "codebase",
+  "project": {
+    "name": "monastic-governance",
+    "languages": [
+      "javascript"
+    ],
+    "frameworks": [],
+    "description": "The Monastic Governance Model for AI Coding Agents — Zero-regression, clean-room audited agentic software engineering blueprint.",
+    "analyzedAt": "2026-09-12T10:44:08.751Z",
+    "gitCommitHash": "96ba1719e32eb25a238efe58bb68e9981b48a952"
+  },
+  "nodes": [
+    {
+      "id": "pipeline:.github/workflows/monastic-visit.yml",
+      "type": "pipeline",
+      "name": "monastic-visit.yml",
+      "summary": "CI/CD workflow",
+      "tags": [
+        "ci"
+      ],
+      "complexity": "simple",
+      "filePath": ".github/workflows/monastic-visit.yml"
+    },
+    {
+      "id": "document:AGENTS.md",
+      "type": "document",
+      "name": "AGENTS.md",
+      "summary": "AGENTS.md — The Rule of Monastic Governance",
+      "tags": [
+        "docs"
+      ],
+      "complexity": "simple",
+      "filePath": "AGENTS.md"
+    },
+    {
+      "id": "document:README.md",
+      "type": "document",
+      "name": "README.md",
+      "summary": "🏛️ The Monastic Governance Model for AI Coding Agents",
+      "tags": [
+        "docs"
+      ],
+      "complexity": "moderate",
+      "filePath": "README.md"
+    },
+    {
+      "id": "document:ROLL.md",
+      "type": "document",
+      "name": "ROLL.md",
+      "summary": "ROLL.md — The Chronicle of Monastic Governance",
+      "tags": [
+        "docs"
+      ],
+      "complexity": "simple",
+      "filePath": "ROLL.md"
+    },
+    {
+      "id": "document:docs/ISSUE_DIVISION.md",
+      "type": "document",
+      "name": "ISSUE_DIVISION.md",
+      "summary": "Chapter of Faults — How gaps are divided between monasteries",
+      "tags": [
+        "docs"
+      ],
+      "complexity": "simple",
+      "filePath": "docs/ISSUE_DIVISION.md"
+    },
+    {
+      "id": "config:federation.neighbors.json",
+      "type": "config",
+      "name": "federation.neighbors.json",
+      "summary": "Config federation.neighbors.json",
+      "tags": [
+        "config"
+      ],
+      "complexity": "simple",
+      "filePath": "federation.neighbors.json"
+    },
+    {
+      "id": "config:lefthook.yml",
+      "type": "config",
+      "name": "lefthook.yml",
+      "summary": "Config lefthook.yml",
+      "tags": [
+        "config"
+      ],
+      "complexity": "simple",
+      "filePath": "lefthook.yml"
+    },
+    {
+      "id": "config:package.json",
+      "type": "config",
+      "name": "package.json",
+      "summary": "Config package.json",
+      "tags": [
+        "config"
+      ],
+      "complexity": "simple",
+      "filePath": "package.json"
+    },
+    {
+      "id": "file:scripts/check-neighbors.mjs",
+      "type": "file",
+      "name": "check-neighbors.mjs",
+      "summary": "#!/usr/bin/env node",
+      "tags": [
+        "tooling"
+      ],
+      "complexity": "complex",
+      "filePath": "scripts/check-neighbors.mjs"
+    },
+    {
+      "id": "endpoint:scripts/check-neighbors.mjs:taso",
+      "type": "endpoint",
+      "name": "Torneopal/TASO",
+      "summary": "Association REST client",
+      "tags": [
+        "taso",
+        "tooling"
+      ],
+      "complexity": "moderate",
+      "filePath": "scripts/check-neighbors.mjs"
+    },
+    {
+      "id": "file:scripts/monastery-visitor.mjs",
+      "type": "file",
+      "name": "monastery-visitor.mjs",
+      "summary": "const ROOT = process.cwd();",
+      "tags": [
+        "tooling"
+      ],
+      "complexity": "simple",
+      "filePath": "scripts/monastery-visitor.mjs"
+    },
+    {
+      "id": "file:scripts/understand.mjs",
+      "type": "file",
+      "name": "understand.mjs",
+      "summary": "#!/usr/bin/env node",
+      "tags": [
+        "tooling"
+      ],
+      "complexity": "complex",
+      "filePath": "scripts/understand.mjs"
+    },
+    {
+      "id": "endpoint:scripts/understand.mjs:taso",
+      "type": "endpoint",
+      "name": "Torneopal/TASO",
+      "summary": "Association REST client",
+      "tags": [
+        "taso",
+        "tooling"
+      ],
+      "complexity": "moderate",
+      "filePath": "scripts/understand.mjs"
+    },
+    {
+      "id": "document:templates/AGENTS.template.md",
+      "type": "document",
+      "name": "AGENTS.template.md",
+      "summary": "AGENTS.md — The Rule of [Your Project Name]",
+      "tags": [
+        "docs"
+      ],
+      "complexity": "simple",
+      "filePath": "templates/AGENTS.template.md"
+    },
+    {
+      "id": "document:templates/ROLL.template.md",
+      "type": "document",
+      "name": "ROLL.template.md",
+      "summary": "ROLL.md — The Chronicle of the Monastery",
+      "tags": [
+        "docs"
+      ],
+      "complexity": "simple",
+      "filePath": "templates/ROLL.template.md"
+    },
+    {
+      "id": "concept:the-rule",
+      "type": "concept",
+      "name": "The Rule (AGENTS.md)",
+      "summary": "Supreme house rule, <1500 words",
+      "tags": [
+        "governance"
+      ],
+      "complexity": "simple",
+      "filePath": "AGENTS.md"
+    },
+    {
+      "id": "concept:chapter-of-neighbors",
+      "type": "concept",
+      "name": "Chapter of Neighbors",
+      "summary": "Visit-gate that freezes contracts and peer AGENTS.md",
+      "tags": [
+        "governance",
+        "treaty"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "pipeline:.github/workflows/monastic-visit.yml",
+      "target": "document:AGENTS.md",
+      "type": "triggers",
+      "direction": "forward",
+      "weight": 0.4
+    },
+    {
+      "source": "file:scripts/check-neighbors.mjs",
+      "target": "endpoint:scripts/check-neighbors.mjs:taso",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/understand.mjs",
+      "target": "endpoint:scripts/understand.mjs:taso",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "document:AGENTS.md",
+      "target": "concept:the-rule",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 1
+    }
+  ],
+  "layers": [
+    {
+      "id": "ci",
+      "name": "Ci",
+      "description": "ci layer",
+      "nodeIds": [
+        "pipeline:.github/workflows/monastic-visit.yml"
+      ]
+    },
+    {
+      "id": "docs",
+      "name": "Docs",
+      "description": "docs layer",
+      "nodeIds": [
+        "document:AGENTS.md",
+        "document:README.md",
+        "document:ROLL.md",
+        "document:docs/ISSUE_DIVISION.md",
+        "document:templates/AGENTS.template.md",
+        "document:templates/ROLL.template.md"
+      ]
+    },
+    {
+      "id": "app",
+      "name": "App",
+      "description": "app layer",
+      "nodeIds": []
+    },
+    {
+      "id": "config",
+      "name": "Config",
+      "description": "config layer",
+      "nodeIds": [
+        "config:federation.neighbors.json",
+        "config:lefthook.yml",
+        "config:package.json"
+      ]
+    },
+    {
+      "id": "tooling",
+      "name": "Tooling",
+      "description": "tooling layer",
+      "nodeIds": [
+        "file:scripts/check-neighbors.mjs",
+        "file:scripts/monastery-visitor.mjs",
+        "file:scripts/understand.mjs"
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "The Rule",
+      "description": "Read AGENTS.md before changing code.",
+      "nodeIds": [
+        "document:AGENTS.md",
+        "concept:the-rule"
+      ]
+    },
+    {
+      "order": 3,
+      "title": "Services",
+      "description": "API clients and TASO cache policy.",
+      "nodeIds": [
+        "endpoint:scripts/check-neighbors.mjs:taso",
+        "endpoint:scripts/understand.mjs:taso"
+      ]
+    },
+    {
+      "order": 5,
+      "title": "Visit gate",
+      "description": "npm run visit + check-neighbors.mjs",
+      "nodeIds": [
+        "file:scripts/check-neighbors.mjs",
+        "endpoint:scripts/check-neighbors.mjs:taso"
+      ]
+    }
+  ]
+}
