@@ -10,6 +10,7 @@ Sovereign remotes. No shared working tree. A finding is assigned to **one** mona
 | `RULE` | The monastery whose `AGENTS.md` is wrong; **or** `monastic-governance` if the template itself is wrong | Archon | Word-cap breach, volatile facts in the Rule, missing rite |
 | `treaty` | `sports-federation` (`contracts/`) | Legate | Missing interface, breaking field, adapter not satisfying a canon |
 | `congregation` | `sports-federation` | Abbas Primas | Golden-test drift, `GLOBAL_ROLL.md`, deployment matrix, sibling-path leftovers in federation runners |
+| `neighbor` | Peer named in `federation.neighbors.json` `needs[]`, **or** the house whose adapter drifted | Legate (treaty fields) / Cellarer (live HTTP) / Archon (AGENTS.md) | `check-neighbors.mjs` blocking: dropped required contract field, missing AGENTS.md, neighbor repo 404 |
 
 Never file a `house` bug in the kattorepo because it is easier. The house that owns the file owns the issue.
 
@@ -17,7 +18,7 @@ Never file a `house` bug in the kattorepo because it is easier. The house that o
 
 ```markdown
 ## Fault
-- **Class:** house | RULE | treaty | congregation
+- **Class:** house | RULE | treaty | congregation | neighbor
 - **Monastery:** pelipaiva | football-stats | floorball-stats | basketball-stats | volleyball-stats | Parkkis | weather-stats | sports-federation | monastic-governance
 - **Office:** Cellarer | Scriptorium | Prior | Master of Works | Sacrist | Legate | Archon | Abbas Primas
 - **Severity:** blocking | advisory
@@ -42,3 +43,18 @@ If a change needs two houses (e.g. Pelipäivä drawer + weather-stats Pages URL)
 ## 4. Lefthook / git-guard (independent remotes)
 
 `../scripts/git-guard.mjs` is a **monorepo leftover**. Each monastery must vendor `scripts/git-guard.mjs` and point Lefthook at `node scripts/git-guard.mjs`. Federation runners that `join(ROOT, 'pelipaiva')` only work in a local checkout of siblings; they are not GitHub-remote truth.
+
+## 5. Chapter of Neighbors (future-break gate)
+
+Every house vendors `scripts/check-neighbors.mjs` and runs it from `npm run visit`. The graph is `contracts/neighbors.json` in `sports-federation` (copied as `federation.neighbors.json`).
+
+It fails closed when a future change would break peers:
+
+- Required canonical field removed from an adapter → **treaty** / **neighbor**
+- `AGENTS.md` deleted or over 1,500 words → **RULE**
+- Peer GitHub 404 → **neighbor**
+- Plan file without the 5-point spec (User Journey / When it succeeds / When it should fail) → **advisory** (Sacrist)
+- Live Pages / TASO 403 → **advisory** (Cellarer)
+
+Canon: https://github.com/traali/sports-federation/blob/main/docs/NEIGHBORS.md
+

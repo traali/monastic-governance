@@ -32,6 +32,7 @@ The canonical, tool-agnostic rule for all AI agents and contributors working in 
 ## §3 Testing & Quality Gates
 - **Unit & Integration Tests:** All parsers, date calculations, and business logic must have deterministic test fixtures. Zero dynamic/relative dates in mocks.
 - **Pre-visitation Gate:** Run `npm run visit` before requesting visitation.
+- **Neighbor check:** `npm run visit` must run `scripts/check-neighbors.mjs` so peer monasteries, canonical contract fields, and 5-point plans stay in line. Future contract breaks fail this gate.
 - **Definition of Done:**
   1. `npm run lint` reports zero errors.
   2. `npm run test` passes with 100% green tests.
