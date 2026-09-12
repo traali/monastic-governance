@@ -31,7 +31,7 @@ npx wrangler whoami
 | weather-stats | **Pages** `weather-stats` | UI. FMI from the browser |
 | sakkoja | **Pages** `sakkoja` | already Git-connected |
 | pelipaiva | **Worker** `pelipaiva` (UI assets) + **Worker** `pelipaiva-edge` (KV) | do **not** delete Pages until redirect |
-| football-stats/workers/taso-proxy | **Worker** `taso-proxy` | shared cache/CORS for all four sports |
+| traali/taso-proxy | **Worker** `taso-proxy` | own monastery. Git-connect this repo to the existing Worker |
 | sports-federation | skip | |
 
 **Project name ≠ hostname.** Wrangler uses the project name:
@@ -87,10 +87,11 @@ npm ci && npm run build
 npx wrangler pages deploy ./dist --project-name=weather-stats
 ```
 
-Then the Torneopal cache Worker (from football-stats):
+Then the Torneopal cache Worker (own repo):
 
 ```bash
-cd football-stats/workers/taso-proxy
+cd taso-proxy
+npm ci && npm test
 npx wrangler deploy
 # → https://taso-proxy.sakkoja.workers.dev
 ```
