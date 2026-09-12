@@ -16,14 +16,14 @@ Click the **["Use this template"](https://github.com/traali/monastic-governance/
 
 ```bash
 # 1. Copy the core monastic structure to your codebase
-cp AGENTS.template.md /path/to/your-repo/AGENTS.md
-cp ROLL.template.md /path/to/your-repo/ROLL.md
+cp templates/AGENTS.template.md /path/to/your-repo/AGENTS.md
+cp templates/ROLL.template.md /path/to/your-repo/ROLL.md
 cp -r .agent /path/to/your-repo/
 cp -r scripts /path/to/your-repo/
 cp lefthook.yml /path/to/your-repo/
 
 # 2. Add the automated visit script to your package.json
-# "scripts": { "visit": "node scripts/monastery-visitor.mjs" }
+# "scripts": { "visit": "node scripts/monastery-visitor.mjs", "check": "npm run lint && npm run test" }
 
 # 3. Verify the pre-visitation gate
 npm run visit
@@ -61,8 +61,8 @@ Sprawling 50KB Prompts ──> Context / Prompt Rot ──> Hallucinations & Dif
 | Failure Mode | Why It Happens | How Monastic Governance Solves It |
 |---|---|---|
 | **Context & Prompt Rot** | Prompts grow uncontrollably. LLMs skip rules buried in 50KB documentation. | **Hard-Capped Supreme Rule (`AGENTS.md` < 1,500 words)**. Volatile facts (versions, routes) are strictly banned and offloaded to single sources of truth. |
-| **Self-Confirmation Bias** | The agent that wrote the implementation verifies its own pull request, inventing excuses for broken edges. | **Separation of Duties (§11)**: The author agent NEVER audits its own code. An isolated **Visitor subagent** audits the diff with zero prior reasoning or author context. |
-| **Swarm Noise & Diff Drift** | Free-roaming multi-agent swarms touch unrelated files, duplicate code, and pass blame. | **6 Accountable Offices**: Every file and test is owned by a dedicated Office with a matched AI model tier. |
+| **Self-Confirmation Bias** | The agent that wrote the implementation verifies its own pull request, inventing excuses for broken edges. | **Separation of Duties**: The author agent NEVER audits its own code. An isolated **Visitor subagent** audits the diff with zero prior reasoning or author context. |
+| **Swarm Noise & Diff Drift** | Free-roaming multi-agent swarms touch unrelated files, duplicate code, and pass blame. | **6 Accountable Offices** (+ optional **Legate** for cross-repo contracts): Every file and test is owned by a dedicated Office with a matched AI model tier. |
 
 ---
 
@@ -75,19 +75,19 @@ Sprawling 50KB Prompts ──> Context / Prompt Rot ──> Hallucinations & Dif
                     │    (< 1,500 words)      │
                     └────────────┬────────────┘
                                  │
-         ┌───────────────────────┼───────────────────────┐
+         ┌──────────────────────┼───────────────────────┐
          ▼                       ▼                       ▼
-┌───────────────────┐   ┌───────────────────┐   ┌───────────────────┐
+┌──────────────────┐   ┌──────────────────┐   ┌──────────────────┐
 │Accountable Offices│   │Pre-Visitation Gate│   │Clean-Room Visitor │
 │  Domain Ownership │   │npm run visit (CI) │   │ Adversarial Audit │
 │ Model Tier Routing│   │0 Lint, 100% Green │   │PASS / WITH / BLOCK│
-└───────────────────┘   └───────────────────┘   └───────────────────┘
+└──────────────────┘   └──────────────────┘   └──────────────────┘
 ```
 
 1. **Constitutional Precedence:** `AGENTS.md` is the supreme law. Tool configs (`.cursorrules`, `CLAUDE.md`, IDE instructions) are thin pointers to `AGENTS.md`.
 2. **Separation of Duties:** The author who wrote a change never audits it. Verification is performed by a fresh, clean-room Visitor subagent.
 3. **Accountable Offices:** Tasks are cleanly divided across dedicated domains (Edge, Parsers, State, UI, Tests, Audit).
-4. **Deterministic Pre-Conditions:** The Visitor only inspects a clean tree (`npm run visit` passing: 0 lint errors, 100% green tests, strict typecheck).
+4. **Deterministic Pre-Conditions:** The Visitor only inspects a clean tree (`npm run visit` passing: 0 lint errors, 100% green tests).
 5. **Continuous Chronicle:** All decisions, dispensations, and audit verdicts are permanently recorded in an append-only `ROLL.md`.
 
 ---
@@ -96,7 +96,7 @@ Sprawling 50KB Prompts ──> Context / Prompt Rot ──> Hallucinations & Dif
 
 The Monastic Model has evolved with state-of-the-art agentic engineering:
 
-### 🌟 1. Multi-Repo Federation ("The General Chapter")
+### 1. Multi-Repo Federation ("The General Chapter")
 When a system expands beyond a single repository, the architecture scales into a **Federation of Monasteries**:
 - **Sovereign Monasteries:** Individual repos with their own internal Rule (`AGENTS.md`), local offices, and tests.
 - **The General Chapter Repository:** A central governance repo containing:
@@ -104,24 +104,27 @@ When a system expands beyond a single repository, the architecture scales into a
   - **The Global Roll (`GLOBAL_ROLL.md`):** Cross-monastery architectural decisions.
   - **Supreme Golden Test Suite:** Outside-in, black-box integration tests verifying user journeys across repositories without blowing up local LLM context limits (< 1,500 words per repo).
 
-### 🌟 2. CI-Enforced Visitation Gate (`.github/workflows/monastic-visit.yml`)
-Automated enforcement runs in cloud CI on every Pull Request:
-- **Word Count Enforcement:** Automatically fails CI if `AGENTS.md` exceeds 1,500 words.
-- **Static Linter & Typecheck Gate:** Zero errors required.
-- **Deterministic Test Suite:** 100% green tests required before human or Visitor review.
+### 2. CI-Enforced Pre-Visitation Gate (`.github/workflows/monastic-visit.yml`)
+Production monasteries run **`npm run visit`** on every push/PR. That script enforces:
+- `AGENTS.md` word-count cap (< 1,500 words)
+- Static lint (0 errors)
+- Deterministic tests (100% green)
+- Optional sibling-repo contract check when `contracts/verify-contracts.mjs` is reachable
 
-### 🌟 3. Model Tier Routing Matrix
+This is a **precondition** gate. The Clean-Room Visitor remains an isolated agent ritual, not a GitHub Action job.
+
+### 3. Model Tier Routing Matrix
 Different offices require different reasoning capabilities. Matching model tiers prevents budget waste while maintaining elite reasoning quality:
 - **`flash` / `flash_lite`:** Fast regex checks, mock fixtures, formatting, test runs.
 - **`pro` / `inherit`:** Architectural state machines, concurrency handling, and clean-room adversarial audits.
 
-### 🌟 4. Formalized Fault Attribution (`house` vs `RULE`)
+### 4. Formalized Fault Attribution (`house` vs `RULE`)
 Every audit finding is classified into one of two faults:
 - `house`: Code violated the Rule. The author fixes the code.
 - `RULE`: Code is valid, but the Rule is obsolete, contradictory, or impractical. The author files a **Ground-4 Rebuttal**, amends `AGENTS.md`, and logs a dispensation in `ROLL.md`.
 
-### 🌟 5. Dynamic Office Chartering
-When a new technical domain arises (e.g. Weather Radar, Local on-device LLMs, WhatsApp bots), the Archon dynamically charters a specialized Office via `define_subagent` rather than bloating existing agents.
+### 5. Dynamic Office Chartering
+When a new technical domain arises (e.g. Weather Radar, Local on-device LLMs, WhatsApp bots), the Archon dynamically charters a specialized Office via `define_subagent` rather than bloating existing agents. Satellite repos also charter a **Legate** office for `contracts/` conformance.
 
 ---
 
@@ -136,6 +139,8 @@ When a new technical domain arises (e.g. Weather Radar, Local on-device LLMs, Wh
 | **Sacrist** | `sacrist_office` | Unit test suites, mock fixtures, E2E browser tests | `flash` (fast runs) or `pro` (adversarial suites) | 100% test green gate, deterministic mock fixtures, test speed (< 5s) |
 | **Visitor** | `visitor_office` | Clean-room adversarial audit against `AGENTS.md` (never writes code) | `pro` / `inherit` (strict reasoning) | Independent audit report, zero compliments, exact rule & line citations |
 
+Federation satellites add **Legate** (`legate_office`) for `SportStatsContract` / `ParkingRiskContract` / `WeatherForecastContract` conformance — never owned by the Visitor.
+
 ---
 
 ## 5. Separation of Duties: The Clean-Room Visitor Protocol
@@ -145,6 +150,8 @@ When an author agent finishes implementing code, it **MUST NOT** approve its own
 2. The `git diff` against base branch
 3. The test results
 4. **Zero conversation history or author reasoning.**
+
+The orchestrator must actually start a **new context** (empty history). Markdown alone cannot enforce this.
 
 ### The Adversarial Audit Directive:
 > *"Be adversarial. Zero findings is a valid and expected outcome. Do NOT invent findings to appear thorough. Do NOT summarize what went well. Do NOT compliment the author. Cite exact rule section (§N) and file:line for every finding."*
@@ -158,31 +165,22 @@ When an author agent finishes implementing code, it **MUST NOT** approve its own
 
 ## 6. The Multi-Repo Federation ("The General Chapter")
 
-For large-scale architectures spanning multiple microservices, applications, or edge workers:
+Live split on GitHub (`user:traali`). One kattorepo + seven sovereign monasteries. Each monastery is an independent git remote — not a monorepo subdirectory.
 
-```
-                      ┌─────────────────────────────────┐
-                      │    CENTRAL GOVERNANCE REPO      │
-                      │  traali/sports-federation       │
-                      │                                 │
-                      │  • The Canons (contracts/index) │
-                      │  • The Global Roll (GLOBAL_ROLL)│
-                      │  • Supreme Golden Test Suite    │
-                      └────────────────┬────────────────┘
-                                       │ Enforces Contract Invariants
-         ┌─────────────────────────────┼─────────────────────────────┐
-         ▼                             ▼                             ▼
-┌──────────────────┐          ┌──────────────────┐          ┌──────────────────┐
-│   MONASTERY 1    │          │   MONASTERY 2    │          │   MONASTERY 3    │
-│    pelipaiva     │          │  football-stats  │          │     Parkkis      │
-│                  │          │                  │          │                  │
-│ • Local AGENTS.md│          │ • Local AGENTS.md│          │ • Local AGENTS.md│
-│ • Local Offices  │          │ • Local Offices  │          │ • Local Offices  │
-│ • Context <1.5k  │          │ • Context <1.5k  │          │ • Context <1.5k  │
-└──────────────────┘          └──────────────────┘          └──────────────────┘
-```
+| Component / Repo | GitHub | Role |
+|---|---|---|
+| **sports-federation** | [traali/sports-federation](https://github.com/traali/sports-federation) | Kattorepo: Canons (`contracts/index.ts`), `GLOBAL_ROLL.md`, Supreme Golden Test driver |
+| **pelipaiva** | [traali/pelipaiva](https://github.com/traali/pelipaiva) | Family hub, MyClub/Nimenhuuto parsers, conflict engine |
+| **football-stats** | [traali/football-stats](https://github.com/traali/football-stats) | Palloliitto / Torneopal, standings, H2H |
+| **floorball-stats** | [traali/floorball-stats](https://github.com/traali/floorball-stats) | SSBL / Torneopal, period tracking, YV/AV% |
+| **basketball-stats** | [traali/basketball-stats](https://github.com/traali/basketball-stats) | Basket.fi, 4 quarters, team fouls |
+| **volleyball-stats** | [traali/volleyball-stats](https://github.com/traali/volleyball-stats) | Lentopalloliitto, 25-point sets |
+| **Parkkis** | [traali/Parkkis](https://github.com/traali/Parkkis) | Helsinki/Espoo parking radar, disc zones, fines |
+| **weather-stats** | [traali/weather-stats](https://github.com/traali/weather-stats) | FMI WFS forecasts, lightning radar, turf slickness |
 
-Each sovereign monastery keeps its LLM context tight and focused (< 1,500 words), while the central Federation repository guarantees system-wide contract integrity.
+Each sovereign monastery keeps its LLM context tight (`AGENTS.md` < 1,500 words). The kattorepo does **not** carry a product `AGENTS.md`; it carries treaties and golden tests. `scripts/run-federation-checks.mjs` runs `npm run check` across all 7 monasteries.
+
+Canonical contracts v1.0.0: `MatchdayContextContract`, `ParkingRiskContract`, `SportStatsContract`, `CrossRepoQueryContract`, `WeatherForecastContract`.
 
 ---
 
@@ -197,19 +195,22 @@ All ready-to-use templates are included in this repository:
 | **Chapter Rite** | Session start & delegation workflow | [`.agent/workflows/chapter.md`](.agent/workflows/chapter.md) |
 | **Visitation Workflow** | Clean-room adversarial audit instructions | [`.agent/workflows/visitation.md`](.agent/workflows/visitation.md) |
 | **Rebuttal Workflow** | Right of appeal & 4 grounds | [`.agent/workflows/rebuttal.md`](.agent/workflows/rebuttal.md) |
+| **Handoff Workflow** | Inter-session state transfer | [`.agent/workflows/handoff.md`](.agent/workflows/handoff.md) |
 | **Pre-Visitation Gate** | Automated Node.js verification script | [`scripts/monastery-visitor.mjs`](scripts/monastery-visitor.mjs) |
-| **CI Gate Workflow** | GitHub Actions cloud workflow | [`.github/workflows/monastic-visit.yml`](.github/workflows/monastic-visit.yml) |
+| **CI Gate Workflow** | GitHub Actions runs `npm run visit` | [`.github/workflows/monastic-visit.yml`](.github/workflows/monastic-visit.yml) |
 | **Git Hook Config** | Lefthook pre-commit/pre-push hooks | [`lefthook.yml`](lefthook.yml) |
+
+Replace stub `lint` / `test` scripts in an adopting product repo with real gates (`eslint --max-warnings=0`, `tsc --noEmit`, Vitest). The template repo itself uses no-op scripts because it ships no product code.
 
 ---
 
 ## 8. Real-World Case Study
 
-The Monastic Governance Model was developed and battle-tested in **[Pelipäivä](https://github.com/traali/pelipaiva)**, a production offline-first junior sports PWA serving Finnish families:
-- **57 test files, 509/509 deterministic tests passing (100% green)**
-- **Zero ESLint errors & 0 TS errors**
-- **Clean-room visitation audits** caught subtle issues (untested CSV parsers, DST timezone edge cases, missing touch targets) before code reached production.
-- Scaled smoothly across a **6-monastery multi-repo federation** (`pelipaiva`, `football-stats`, `Parkkis`, `volleyball-stats`, `basketball-stats`, `weather-stats`) governed by `sports-federation`.
+The Monastic Governance Model was developed and battle-tested in **[Pelipäivä](https://github.com/traali/pelipaiva)**, a production offline-first junior sports PWA serving Finnish families, then extracted to this template:
+- Pelipäivä: 57 test files, 509/509 deterministic tests, 0 ESLint / 0 TS errors
+- Clean-room visitation audits caught untested CSV parsers, DST timezone edges, and missing 44px touch targets before production
+- Gold-standard pack (copy this): `AGENTS.md` + `ROLL.md` + `.agent/workflows/{chapter,visitation,rebuttal,handoff}.md` + `scripts/monastery-visitor.mjs` + `.github/workflows/monastic-visit.yml` + `lefthook.yml` + `npm run visit` / `npm run check`
+- Live federation: **7 monasteries + kattorepo** listed in §6, governed by [traali/sports-federation](https://github.com/traali/sports-federation)
 
 ---
 
