@@ -15,3 +15,9 @@ Append-only record of blueprint releases, architectural decisions, and rule amen
 - **Action:** Matched this blueprint to production: 7 sovereign monasteries + `sports-federation` kattorepo; added `handoff.md`; CI now runs `npm run visit` like pelipaiva.
 - **Verdict:** PASS
 - **Rationale:** Case study listed a 6-repo mix that did not match GitHub. Gold standard remains pelipaiva / football-stats.
+
+## 2026-09-12 — Chapter of Faults & CI lockfile fix
+- **Actor:** Sacrist & Archon
+- **Action:** Visit workflow no longer requires `package-lock.json` (`npm ci` if present, else `npm install`). Added `docs/ISSUE_DIVISION.md` so federation gaps are filed in the owning monastery (`house` / `RULE` / `treaty` / `congregation`).
+- **Verdict:** PASS
+- **Rationale:** Template CI was red on every push. Cross-repo bugs were landing in the wrong house.
