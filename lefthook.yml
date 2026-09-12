@@ -1,0 +1,18 @@
+# Lefthook Git Hooks — The Monastic Pre-Commit & Pre-Push Guard
+# Install: npx lefthook install
+
+pre-commit:
+  parallel: false
+  commands:
+    eslint:
+      glob: "*.{js,ts,jsx,tsx}"
+      run: npx eslint {staged_files}
+    oxlint:
+      glob: "*.{js,ts,jsx,tsx}"
+      run: npx oxlint {staged_files}
+
+pre-push:
+  parallel: false
+  commands:
+    monastery-visit:
+      run: npm run visit

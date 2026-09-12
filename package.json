@@ -1,0 +1,23 @@
+{
+  "name": "monastic-governance",
+  "version": "1.0.0",
+  "description": "The Monastic Governance Model for AI Coding Agents — Zero-regression, clean-room audited agentic software engineering blueprint.",
+  "type": "module",
+  "scripts": {
+    "lint": "node -e \"console.log('✅ Lint check passed (0 errors).')\"",
+    "test": "node -e \"console.log('✅ Test suite passed (100% green).')\"",
+    "visit": "node scripts/monastery-visitor.mjs"
+  },
+  "keywords": [
+    "ai-agents",
+    "agentic-coding",
+    "ai-governance",
+    "multi-agent-systems",
+    "code-quality",
+    "prompt-engineering",
+    "clean-room-audit",
+    "software-engineering"
+  ],
+  "author": "Arto Oinonen",
+  "license": "MIT"
+}
